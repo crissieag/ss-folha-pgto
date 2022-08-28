@@ -2,13 +2,27 @@
 GET https://localhost:5001/api/usuario/listar
 
 ### Buscar um usuário
-GET https://localhost:5001/api/usuario/buscar/diogo
+GET https://localhost:5001/api/usuario/buscar/123456789
 
 ### Cadastrar um usuário
 POST https://localhost:5001/api/usuario/cadastrar
 Content-Type: application/json
 
 {
-    "login" : "diogo",
-    "senha" : "123456789"
+    "nome" : "Cris",
+    "cpf" : "123456789",
+    "dataNascimento": "2022-08-28T20:38:47Z"
 }
+
+###Modificar dadod do  usuario
+PUT https://localhost:5001/api/usuario/editar/123456789
+Content-Type: application/json
+
+{
+    "nome" : "Kunin",
+    "cpf" : "123456789",
+    "dataNascimento": "2022-08-28T20:38:47Z"
+}
+
+###Deletar usuario
+DELETE https://localhost:5001/api/usuario/deletar/123456789

@@ -1,6 +1,6 @@
 using System;
 
-namespace API.Models 
+namespace API.Models
 {
     public class Usuario
     {
@@ -8,8 +8,9 @@ namespace API.Models
         {
             CriadoEm = DateTime.Now;
         }
-        public string Login { get; set; }
-        public string Senha { get; set; }
-        public DateTime CriadoEm { get; set; }        
+        public string Nome { get; set; }
+        public string Cpf { get; set; }
+        public DateTime DataNascimento { get; set; }
+        public DateTime CriadoEm { get; set; }
     }
 }
