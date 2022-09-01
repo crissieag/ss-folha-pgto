@@ -1,0 +1,28 @@
+### Listar os funcionarios
+GET https://localhost:5001/api/funcionario/listar
+
+### Buscar um funcionario
+GET https://localhost:5001/api/funcionario/buscar/123456789
+
+### Cadastrar um funcionario
+POST https://localhost:5001/api/funcionario/cadastrar
+Content-Type: application/json
+
+{
+    "nome" : "Cris",
+    "cpf" : "123456789",
+    "dataNascimento": "2022-08-28T20:38:47Z"
+}
+
+###Modificar dado do  funcionario
+PUT https://localhost:5001/api/funcionario/editar/123456789
+Content-Type: application/json
+
+{
+    "nome" : "Kunin",
+    "cpf" : "123456789",
+    "dataNascimento": "2022-08-28T20:38:47Z"
+}
+
+###Deletar funcionario
+DELETE https://localhost:5001/api/funcionario/deletar/123456789

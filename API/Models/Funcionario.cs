@@ -2,9 +2,9 @@ using System;
 
 namespace API.Models
 {
-    public class Usuario
+    public class Funcionario
     {
-        public Usuario()
+        public Funcionario()
         {
             CriadoEm = DateTime.Now;
         }
