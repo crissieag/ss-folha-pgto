@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using API.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace API.Controllers
 {
@@ -32,14 +33,9 @@ namespace API.Controllers
         [Route("buscar/{cpf}")]
         public IActionResult Buscar([FromRoute] string cpf)
         {
-            for (int i = 0; i < funcionarios.Count; i++)
-            {
-                if (funcionarios[i].Cpf.Equals(cpf))
-                {
-                    return Ok(funcionarios[i]);
-                }
-            }
-            return NotFound();
+            Funcionario funcionario = funcionarios.FirstOrDefault(funcionarioCadastrado => funcionarioCadastrado.Cpf.Equals(cpf));
+
+            return funcionario != null ? Ok(funcionario) : NotFound();
         }
 
         //Delete: /api/funcionario/deletar/{cpf}
@@ -47,32 +43,48 @@ namespace API.Controllers
         [Route("deletar/{cpf}")]
         public IActionResult Deletar([FromRoute] string cpf)
         {
-            for (int i = 0; i < funcionarios.Count; i++)
+            // Funcionario funcionario = funcionarios.FirstOrDefault(funcionarioCadastrado => funcionarioCadastrado.Cpf.Equals(cpf));
+
+            // if(funcionario != null){
+            //     funcionarios.Remove(funcionario);
+            //     return Ok(funcionario);
+            // }
+            // return NotFound();
+
+            foreach (Funcionario funcionarioCadastrado in funcionarios)
             {
-                if (funcionarios[i].Cpf.Equals(cpf))
-                {
-                    string nomeFuncionario = funcionarios[i].Nome;
-                    funcionarios.Remove(funcionarios[i]);
-                    return Ok($"Funcionario {nomeFuncionario} deletado com sucesso!");
-                }
+                string nomeFuncionario = funcionarioCadastrado.Nome;
+                funcionarios.Remove(funcionarioCadastrado);
+                return Ok($"Funcionario {nomeFuncionario} deletado com sucesso!");
             }
             return NotFound();
         }
 
-        //Put: /api/usuario/editar/{cpf}
-        [HttpPut]
-        [Route("editar/{cpf}")]
-        public IActionResult Editar([FromBody] Funcionario funcionario, [FromRoute] string cpf)
+        //Patch: /api/funcionario/editar
+        // [Route("editar/{cpf}")]
+        [HttpPatch]
+        [Route("editar")]
+        public IActionResult Editar([FromBody] Funcionario funcionario)
         {
-            for (int i = 0; i < funcionarios.Count; i++)
+
+            Funcionario funcionarioBuscado = funcionarios.FirstOrDefault(funcionarioBuscado => funcionarioBuscado.Cpf.Equals(funcionario.Cpf));
+
+            if (funcionarioBuscado != null)
             {
-                if (funcionarios[i].Cpf.Equals(cpf))
-                {
-                    funcionarios[i] = funcionario;
-                    return Ok();
-                }
+                funcionarioBuscado.Nome = funcionario.Nome;
+                return Ok(funcionario);
             }
             return NotFound();
+
+            // for (int i = 0; i < funcionarios.Count; i++)
+            // {
+            //     if (funcionarios[i].Cpf.Equals(cpf))
+            //     {
+            //         funcionarios[i] = funcionario;
+            //         return Ok();
+            //     }
+            // }
+            // return NotFound();
         }
     }
 }
