@@ -15,13 +15,12 @@ Content-Type: application/json
 }
 
 ###Modificar dado do  funcionario
-PUT https://localhost:5001/api/funcionario/editar/123456789
+PATCH https://localhost:5001/api/funcionario/editar
 Content-Type: application/json
 
 {
     "nome" : "Kunin",
-    "cpf" : "123456789",
-    "dataNascimento": "2022-08-28T20:38:47Z"
+    "cpf" : "123456789"
 }
 
 ###Deletar funcionario
